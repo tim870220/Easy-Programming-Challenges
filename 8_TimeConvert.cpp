@@ -6,7 +6,7 @@
 using namespace std;
 
 void TimeConvert(int num) {
-
+	/*
 	bool hour;
 	int count = 0;
 
@@ -27,14 +27,18 @@ void TimeConvert(int num) {
 	} while (hour);
 
 	cout << count << ":" << num << endl;
+	*/
+	int h = num / 60, m = num % 60;
+	cout << h << ":" << m << endl;
+
 }
 
 int main() {
 
 	// keep this function call here
-	TimeConvert(63);
-	TimeConvert(60);
-	TimeConvert(120);
+	TimeConvert(stoi("63"));      //1:3
+	TimeConvert(60);              //1:0
+	TimeConvert(120);             //2:0
 	return 0;
 
 }

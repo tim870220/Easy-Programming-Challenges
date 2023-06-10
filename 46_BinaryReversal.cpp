@@ -7,25 +7,19 @@
 #include <sstream>
 using namespace std;
 
-int BinaryReversal(string str) 
+string BinaryReversal1(string str) 
 {
-	int num;
-	istringstream(str) >> num;
+	int num = stoi(str);
 
 	// converting to a binary
 	str = "";
-	bool binary = false;
-	while (!binary)
+
+	while (!(num == 0 && str.length() % 8 == 0))
 	{
-		stringstream convert;
-		convert << num % 2;
-		str += convert.str();
+		int n = num % 2;
+		str += to_string(n);
 		num /= 2;
 
-		if (num == 0 && str.length() % 8 == 0) // Condition to make sure the result is 8 bits
-		{
-			binary = true;
-		}
 	}
 
 	// Converting back to a decimal
@@ -34,11 +28,26 @@ int BinaryReversal(string str)
 	{
 		if (str[x] == '1')
 		{
-			total += pow(2, (str.length() - 1) - x);
+			// total += pow(2, (str.length() - 1) - x);
+			total += (1 << (str.length() - 1 - x));
 		}
 	}
 
-	return total;
+	return to_string(total);
+}
+string BinaryReversal(string str){
+	int num = stoi(str);
+	string tmp;
+	while (!(num == 0 && tmp.length()%8 == 0)){
+		tmp += to_string(num % 2);
+		num /= 2;
+	}
+	int res = 0;
+	for (int i = 0; i < tmp.length(); i++){
+		if (tmp[i] == '1')
+			res += 1 << (tmp.length() - 1 - i);
+	}
+	return to_string(res);
 }
 
 int main()

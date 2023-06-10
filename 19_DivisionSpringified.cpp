@@ -5,6 +5,7 @@
 #include <string>
 #include <cmath>
 #include <sstream>
+#include <bits/stdc++.h>
 using namespace std;
 
 string DivisionStringified(int num1, int num2) {
@@ -34,7 +35,7 @@ string DivisionStringified(int num1, int num2) {
 			count++;
 		}
 	}
-  
+	
 	return temp2;
 }
 

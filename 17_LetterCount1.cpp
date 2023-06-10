@@ -3,95 +3,134 @@
 
 #include <iostream>
 #include <string>
+#include <bits/stdc++.h>
 using namespace std;
 
 string LetterCountI(string str) {
 
-	int size = str.length();
-	int count = 0, count2 = 0, high = 0, high2 = 0;
-	int start = -1, end = 0;
-	int temp, temp2;
-	char letter;
+	// int size = str.length();
+	// int count = 0, count2 = 0, high = 0, high2 = 0;
+	// int start = -1, end = 0;
+	// int temp, temp2;
+	// char letter;
 
-	for (int x = 0; x < size; x++, end++)
-	{
-		if (start == -1) // find beginning of the word
-		{
-			start = x;
-		}
+	// for (int x = 0; x < size; x++, end++)
+	// {
+	// 	if (start == -1) // find beginning of the word
+	// 	{
+	// 		start = x;
+	// 	}
 
-		if (str[x] == ' ' || x == size-1)
-		{
-			// Safeguard in the case the correct word is at the end of the string
-			if (end == size - 1)
-			{
-				end += 1;
-			}
+	// 	if (str[x] == ' ' || x == size-1)
+	// 	{
+	// 		// Safeguard in the case the correct word is at the end of the string
+	// 		if (end == size - 1)
+	// 		{
+	// 			end += 1;
+	// 		}
 
-			for (int y = start; y < end; y++)
-			{
-				// selecting letter from word to compare
-				letter = str[y];
+	// 		for (int y = start; y < end; y++)
+	// 		{
+	// 			// selecting letter from word to compare
+	// 			letter = str[y];
 
-				// Loop to check if letter repeats
-				for (int z = start; z < end; z++)
-				{
-					if (y == z)
-					{
-						continue;
-					}
-					else if (letter == str[z])
-					{
-						count++;
-					}
-				}
+	// 			// Loop to check if letter repeats
+	// 			for (int z = start; z < end; z++)
+	// 			{
+	// 				if (y == z)
+	// 				{
+	// 					continue;
+	// 				}
+	// 				else if (letter == str[z])
+	// 				{
+	// 					count++;
+	// 				}
+	// 			}
 
-				if (count)
-				{
-					count2++;
-				}
+	// 			if (count)
+	// 			{
+	// 				count2++;
+	// 			}
 				
-				// Keep track of words with repeated letters
-				if (count > high && count2 > high2)
-				{
-					high = count;
-					high2 = count2;
-					temp = start;
-					temp2 = end;
-				}
+	// 			// Keep track of words with repeated letters
+	// 			if (count > high && count2 > high2)
+	// 			{
+	// 				high = count;
+	// 				high2 = count2;
+	// 				temp = start;
+	// 				temp2 = end;
+	// 			}
 
-				count = 0;
-			}
+	// 			count = 0;
+	// 		}
 
-			// Keep track of words with THE MOST repeated letters
-			if (count2 > high2)
+	// 		// Keep track of words with THE MOST repeated letters
+	// 		if (count2 > high2)
+	// 		{
+	// 			high2 = count2;
+	// 			temp = start;
+	// 			temp2 = end;
+	// 		}
+	// 		count2 = 0;
+
+	// 		start = end+1;
+	// 	}
+	// }
+
+	// // Passing the first word with most repeated letters
+	// if (high > 0)
+	// {
+	// 	string repeated;
+
+	// 	for (temp; temp < temp2; temp++)
+	// 	{
+	// 		repeated.push_back(str[temp]);
+	// 	}
+
+	// 	return repeated;
+	// }
+	// else
+	// {
+	// 	return "-1";
+	// }
+
+	unordered_map<char, int> count;
+	int curr_c = 0;
+	string word;
+	int pre_c = 1;
+	string result = "-1";
+	set<pair<int, string>> test;
+	for (auto s : str)
+	{
+		if (s == ' '){
+			test.insert({curr_c, word});
+			if (curr_c > pre_c)
 			{
-				high2 = count2;
-				temp = start;
-				temp2 = end;
+				result = word;
 			}
-			count2 = 0;
-
-			start = end+1;
+			word.clear();
+			count.clear();
+			pre_c = curr_c;
+			curr_c = 0;
+			continue;
 		}
-	}
 
-	// Passing the first word with most repeated letters
-	if (high > 0)
-	{
-		string repeated;
-
-		for (temp; temp < temp2; temp++)
+		count[s] += 1;
+		word += s;
+		if (count[s] > curr_c)
 		{
-			repeated.push_back(str[temp]);
+			curr_c = count[s];
 		}
+	}
+	
+	cout << test.rbegin()->second << endl;
+	cout << (--test.end())->second << endl;
 
-		return repeated;
-	}
-	else
+	if (curr_c > pre_c)
 	{
-		return "-1";
+		result = word;
 	}
+	return result;
 }
 
 int main() {

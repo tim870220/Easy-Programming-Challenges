@@ -8,26 +8,32 @@ string Palindrome(string str) {
 
 	string temp;
 
-	for (int y = 0; y < str.length(); y++)
-	{
-		if (str[y] != ' ')
-		{
-			temp.push_back(str[y]);
-		}
-	}
-	int size = temp.length() - 1;
+	// for (int y = 0; y < str.length(); y++)
+	// {
+	// 	if (str[y] != ' ')
+	// 	{
+	// 		temp.push_back(str[y]);
+	// 	}
+	// }
+	// int size = temp.length() - 1;
 
-	// Compare the new string by analyzing the characters from the front and back
-	for (int x = 0; x < temp.length(); x++)
+	// // Compare the new string by analyzing the characters from the front and back
+	// for (int x = 0; x < temp.length(); x++)
+	// {
+	// 	if (temp[x] != temp[size])
+	// 	{
+	// 		return "false";
+	// 	}
+	// 	size--;
+	// }
+
+	for (int i = 0; i <= str.length() / 2; i++)
 	{
-		if (temp[x] != temp[size])
-		{
+		if (str[i] != str[str.length()-i-1])
 			return "false";
-		}
-		size--;
 	}
 
-	return "true";
+		return "true";
 }
 
 int main() {
@@ -36,7 +42,7 @@ int main() {
 	cout << Palindrome("racecar") << endl; // true
 	cout << Palindrome("eye") << endl; // true
 	cout << Palindrome("what is this") << endl; // false
-	cout << Palindrome("never odd or even") << endl; // true
+	cout << Palindrome("never odd or even") << endl; // false
 
 	return 0;
 

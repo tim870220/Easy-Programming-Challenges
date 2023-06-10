@@ -7,83 +7,71 @@
 #include <sstream>
 using namespace std;
 
-string ArrayMatching(string strArr[], int size) 
-{
-	int length = 0, length2 = 100 * 100, total, high;
-	vector <vector<int> > list(size);
-	vector <int> newArray;
-	string result;
+string ArrayMatching_GPT(string strArr[], int size){
+	vector<int> arr1, arr2, result;
+    stringstream ss1(strArr[0]), ss2(strArr[1]);
+    char c;
+    int num;
 
-	for (int row = 0; row < size; row++)
-	{
-		for (int col = 0; col < strArr[row].length(); col++)
-		{
-			if (strArr[row][col] == '[' || strArr[row][col] == ' ') // Removing unnecessary characters
-			{
-				strArr[row].erase(strArr[row].begin() + col);
-			}
-		}
+    // parse the first array
+    ss1 >> c; // skip opening bracket
+    while (ss1 >> num) {
+        arr1.push_back(num);
+        ss1 >> c; // skip comma or closing bracket
+    }
 
-		// Passing our string values to a new int list
-		// This will make it easier for calculation and other requirements
-		string temp;
-		for (int x = 0; x < strArr[row].length(); x++)
-		{
-			if (strArr[row][x] == ',' || x == strArr[row].length() - 1)
-			{
-				int num;
-				istringstream(temp) >> num;
-				list[row].push_back(num);
-				temp.clear();
-			}
-			else
-			{
-				temp.push_back(strArr[row][x]);
-			}
-		}
+    // parse the second array
+    ss2 >> c; // skip opening bracket
+    while (ss2 >> num) {
+        arr2.push_back(num);
+        ss2 >> c; // skip comma or closing bracket
+    }
 
-		// Condition to keep track of the largest and shortest sub array
-		if (list[row].size() > length) 
-		{
-			length = list[row].size();
-			high = row; // will determine from which sub-array we need to append if need to
-		}
-		if (list[row].size() < length2)
-		{
-			length2 = list[row].size();
-		}
+    // add the arrays element-wise
+    int n = max(arr1.size(), arr2.size());
+    for (int i = 0; i < n; i++) {
+        int sum = (i < arr1.size() ? arr1[i] : 0) + (i < arr2.size() ? arr2[i] : 0);
+        result.push_back(sum);
+    }
+
+    // convert the result to a string
+    stringstream ss;
+    for (int i = 0; i < result.size(); i++) {
+        ss << result[i];
+        if (i < result.size() - 1) ss << "-";
+    }
+    return ss.str();
+}
+string ArrayMatching(string strArr[], int size){
+	stringstream ss1(strArr[0]), ss2(strArr[1]);
+	vector<int> arr1, arr2, res;
+	int num;
+	char c;
+
+	ss1 >> c;
+	while (ss1 >> num){
+		arr1.push_back(num);
+		ss1 >> c;
+	}
+	ss2 >> c;
+	while (ss2 >> num){
+		arr2.push_back(num);
+		ss2 >> c;
 	}
 
-	// Loop to perform the calculation
-	for (int x = 0; x < length2; x++)
-	{
-		total = 0;
-		total += list[0][x];
-		total += list[1][x];
-		newArray.push_back(total);
+	int n = max(arr1.size(), arr2.size());
+	for (int i = 0; i < n; i++){
+		int s = ((i < arr1.size()) ? arr1[i] : 0) + ((i < arr2.size()) ? arr2[i] : 0);
+		res.push_back(s);
+	}
+	stringstream ss;
+	for (int i = 0; i < res.size(); i++){
+		ss << res[i];
+		if (i != res.size()-1)
+			ss << '-';
 	}
 
-	// Condition to check if we need to append remaining elements
-	if (newArray.size() < length)
-	{
-		for (int x = length2; x < length; x++)
-		{
-			newArray.push_back(list[high][x]);
-		}
-	}
-	
-	// Loop for formatting
-	for (int x = 0; x < newArray.size(); x++)
-	{
-		stringstream convert;
-		convert << newArray[x];
-		result += convert.str();
-		if (x != newArray.size() - 1)
-		{
-			result += "-";
-		}
-	}
-	return result;
+	return ss.str();
 }
 
 int main() 

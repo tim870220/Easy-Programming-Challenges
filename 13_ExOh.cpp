@@ -9,13 +9,21 @@ string ExOh(string str) {
 
 	int xCount = 0, oCount = 0;
 
-	// Simple iteration to keep count on how many characters are either x or o
-	for (int x = 0; x < str.length(); x++)
+	// // Simple iteration to keep count on how many characters are either x or o
+	// for (int x = 0; x < str.length(); x++)
+	// {
+	// 	if (str[x] == 'x')
+	// 		xCount++;
+
+	// 	if (str[x] == 'o')
+	// 		oCount++;
+	// }
+	for (auto& x : str)
 	{
-		if (str[x] == 'x')
+		if (x == 'x')
 			xCount++;
 
-		if (str[x] == 'o')
+		if (x == 'o')
 			oCount++;
 	}
 

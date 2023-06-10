@@ -3,71 +3,78 @@
 
 #include <iostream>
 #include <string>
+#include <bits/stdc++.h>
 using namespace std;
 
 void SecondGreatLow(int arr[], int size) {
 
-	if (size == 2) // In the case that there is only 2 numbers
+	// if (size == 2) // In the case that there is only 2 numbers
+	// {
+	// 	if (arr[0] < arr[1])
+	// 	{
+	// 		cout << arr[0] << " " << arr[1];
+	// 	}
+	// 	else
+	// 	{
+	// 		cout << arr[1] << " " << arr[0];
+	// 	}
+	// }
+	// else
+	// {
+	// 	// Implementing a bubble sort to sort the array from least to greatest
+	// 	bool swap;
+	// 	int temp;
+
+	// 	do
+	// 	{
+	// 		swap = false;
+
+	// 		for (int x = 0; x < size - 1; x++)
+	// 		{
+	// 			if (arr[x] > arr[x + 1])
+	// 			{
+	// 				temp = arr[x];
+	// 				arr[x] = arr[x + 1];
+	// 				arr[x + 1] = temp;
+	// 				swap = true;
+	// 			}
+	// 		}
+	// 	} while (swap);
+
+	// 	int index = 0;
+	// 	int index2 = size - 1;
+	// 	// Loop to check if the first values are the same ex . 2,2,2,2.....
+	// 	for (int y = 0; y < size-1; y++)
+	// 	{
+	// 		if (arr[y] == arr[y + 1])
+	// 		{
+	// 			index++;
+	// 		}
+	// 		else
+	// 		{
+	// 			break;
+	// 		}
+	// 	}
+	// 	// Loop to check if the last values are the same ex .......45,45,45
+	// 	for (int z = size - 1; size > 0; z--)
+	// 	{
+	// 		if (arr[z] == arr[z - 1])
+	// 		{
+	// 			index2--;
+	// 		}
+	// 		else
+	// 		{
+	// 			break;
+	// 		}
+	// 	}
+	// 	cout << arr[index+1] << " " << arr[index2-1];
+	// }
+	set<int> tmp;
+	for (auto i = 0; i < size;i++)
 	{
-		if (arr[0] < arr[1])
-		{
-			cout << arr[0] << " " << arr[1];
-		}
-		else
-		{
-			cout << arr[1] << " " << arr[0];
-		}
+		tmp.insert(arr[i]);
 	}
-	else
-	{
-		// Implementing a bubble sort to sort the array from least to greatest
-		bool swap;
-		int temp;
-
-		do
-		{
-			swap = false;
-
-			for (int x = 0; x < size - 1; x++)
-			{
-				if (arr[x] > arr[x + 1])
-				{
-					temp = arr[x];
-					arr[x] = arr[x + 1];
-					arr[x + 1] = temp;
-					swap = true;
-				}
-			}
-		} while (swap);
-
-		int index = 0;
-		int index2 = size - 1;
-		// Loop to check if the first values are the same ex . 2,2,2,2.....
-		for (int y = 0; y < size-1; y++)
-		{
-			if (arr[y] == arr[y + 1])
-			{
-				index++;
-			}
-			else
-			{
-				break;
-			}
-		}
-		// Loop to check if the last values are the same ex .......45,45,45
-		for (int z = size - 1; size > 0; z--)
-		{
-			if (arr[z] == arr[z - 1])
-			{
-				index2--;
-			}
-			else
-			{
-				break;
-			}
-		}
-		cout << arr[index+1] << " " << arr[index2-1];
-	}
+	cout << *++tmp.begin() << " " << *--tmp.rbegin();
 }
 
 int main() {

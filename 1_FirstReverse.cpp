@@ -17,6 +17,14 @@ string FirstReverse(string str) {
 		index++;
 	}
 	return str;
+
+	// // my self
+	// string temp;
+	// for (int x = str.length()-1; x >= 0; x--)
+	// {
+	// 	temp += str[x];
+	// }
+	// return temp;
 }
 
 int main() 

@@ -14,27 +14,41 @@ string ArithGeo(int arr[], const int size) {
 	difference = arr[1] - arr[0];
 	difference2 = arr[1] / arr[0];
 
-	// Check is the difference is true for all elements
-	// If true than the array is arithmetic
-	for (int y = 0; y < size-1 && arith; y++)
+	// // Check is the difference is true for all elements
+	// // If true than the array is arithmetic
+	// for (int y = 0; y < size-1 && arith; y++)
+	// {
+	// 	arith = false;
+	// 	if (arr[y] + difference == arr[y + 1])
+	// 	{
+	// 		arith = true;
+	// 	}
+	// }
+
+	// // Check is the difference is true for all elements
+	// // If true than the array is geometric
+	// for (int z = 0; z < size - 1 && geo; z++)
+	// {
+	// 	geo = false;
+	// 	if (arr[z] * difference2 == arr[z + 1])
+	// 	{
+	// 		geo = true;
+	// 	}
+	// }
+
+	for (int x = 0; x < size - 1 && (geo || arith); x++)
 	{
-		arith = false;
-		if (arr[y] + difference == arr[y + 1])
+		if (arr[x] + difference != arr[x + 1])
 		{
-			arith = true;
+			arith = false;
+		}
+		if (arr[x] * difference2 != arr[x + 1])
+		{
+			geo = false;
 		}
 	}
 
-	// Check is the difference is true for all elements
-	// If true than the array is geometric
-	for (int z = 0; z < size - 1 && geo; z++)
-	{
-		geo = false;
-		if (arr[z] * difference2 == arr[z + 1])
-		{
-			geo = true;
-		}
-	}
+
 
 	if (arith)
 	{
